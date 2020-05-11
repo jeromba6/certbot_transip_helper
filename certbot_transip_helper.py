@@ -7,11 +7,15 @@ import os
 import time
 import transipApiV6
 
+# Get environment variables that Certbot passes to us.
 certbot_domain = os.getenv('CERTBOT_DOMAIN')
 certbot_validation = os.getenv('CERTBOT_VALIDATION')
 certbot_auth_output = os.getenv('CERTBOT_AUTH_OUTPUT')
+
+# Entry that has to be in there for the validation
 acme_entry = '_acme-challenge'
 
+# Reading the ini file for configuation settings.
 config_file = os.path.expanduser('~') + '/.certbot_transip_helper.ini'
 config = configparser.ConfigParser()
 if len(config.read(config_file)) != 1:
@@ -30,27 +34,27 @@ if 'keyfile' not in config['DEFAULT']:
     print('No "keyfile" in "DEFAULT" section in "{}"'.format(config_file))
     exit(1)
 
-login = config['DEFAULT']['login']
-
+# Open and read key file.
 key_file = open(config['DEFAULT']['keyfile'], "r")
 key = key_file.read()
 key_file.close()
 
 # Get Header for authentication against transip api V6
-headers = transipApiV6.Generic(login, key).get_headers()
+headers = transipApiV6.Generic(config['DEFAULT']['login'], key).get_headers()
 
 # Request domains managed by this account
 domains=transipApiV6.Domains(headers)
 
 # Request DNS entries for this domain
 dns_entries = domains.list_dns_entries(certbot_domain)
-# Find entry
+
+# Check or there are "old" entries
 found_dns_entries = []
 for dns_entry in dns_entries['dnsEntries']:
   if dns_entry['name'] == acme_entry and dns_entry['type'] == 'TXT':
       found_dns_entries.append(dns_entry)
 
-# Remove found entries
+# Remove found "old" entries
 print('{} entries found which have to be removed'.format(len(found_dns_entries)))
 print('Removing: ',end='')
 for dns_entry in found_dns_entries:
@@ -58,7 +62,7 @@ for dns_entry in found_dns_entries:
   print('.',end='')
 print()
 
-# Add entry when needed
+# Add entry new entry for validation only when needed, when certbot_auth_output is set nothing should be created so the script just cleans old entries
 if certbot_auth_output is None:
   data = '''{
     "dnsEntry": {
@@ -71,6 +75,8 @@ if certbot_auth_output is None:
   '''
   domains.add_dns_entry(certbot_domain, data)
   print('Entry for {}.{} created'.format(acme_entry,certbot_domain))
+
+  # Wait and check until new entry can be resolved (could take a while), before continue
   sleep_interval = 10
   max_tries = 100
   failed = True
@@ -87,8 +93,9 @@ if certbot_auth_output is None:
       except:
           pass
 
-if failed:
-    print()
-    print('Checking for DNS change succesfull failed.')
-    exit(1)
-print('Entry resolved succesfully')
+  # End of the retries so check or it has succeded.
+  if failed:
+      print()
+      print('Checking for DNS change succesfull failed.')
+      exit(1)
+  print('Entry resolved succesfully')
