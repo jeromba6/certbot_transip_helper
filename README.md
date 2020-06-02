@@ -34,7 +34,9 @@ This helper can be used in combination with certbot in a way it is shown in `cal
    Entry resolved succesfully
    ```
 
-6. After adjusting `call_certbot.sh` or any other script of your choosing you can make use of it.
+6. After adjusting `call_certbot.sh` or any other script of your choosing you can make use of it.  
+
+   **`call_certbot.sh` uses staging by default, change if necessary.**
 
 Certbot will call the script and create the requested TXT dns entry to validate. After validation the record will be removed again.
 
