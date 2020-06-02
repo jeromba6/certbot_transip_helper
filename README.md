@@ -22,7 +22,7 @@ This helper can be used in combination with certbot in a way it is shown in `cal
 
    **Validation of the text record can take some time, depending of DNS record propagation.**  
 
-   **`test.sh` and certificate request cannot run at the sae time, it uses the same TXT record!**  
+   **`test.sh` and certificate request cannot run at the same time, it uses the same TXT record!**  
 
    **test.sh output:**
 
