@@ -3,7 +3,10 @@
 EMAIL=me@exmple.com
 DOMAIN=example.com
 
-SERVER=https://acme-v02.api.letsencrypt.org/directory
+# Choose staging or live, after staging forcing live can be done by adding: --force-renewal
+# Live
+# SERVER=https://acme-v02.api.letsencrypt.org/directory
+# Staging
 SERVER=https://acme-staging-v02.api.letsencrypt.org/directory
 
 certbot -n --manual-public-ip-logging-ok \
@@ -17,3 +20,5 @@ certbot -n --manual-public-ip-logging-ok \
         --work-dir $PWD/Transip \
         --logs-dir $PWD/Transip \
         -d "*.$DOMAIN"
+        # Force live renewal
+        # -d "*.$DOMAIN" --force-renewal
