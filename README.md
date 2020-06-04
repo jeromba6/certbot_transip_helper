@@ -35,6 +35,7 @@ This helper can be used in combination with certbot in a way it is shown in `cal
    ```
 
 6. Set some environment variables
+
    ```bash
    export CERTBOT_ENV=live  # This is optional, when not set it will use the staging environment of letsencrypt
    export EMAIL=user@example.com # Emailadress for revoking cert
@@ -50,11 +51,10 @@ Certbot will call the script and create the requested TXT dns entry to validate.
 
 It works for wildcard certificates.
 
-
-## TODO ##
+## TODO
 
 Update docker documentation
 
-```
+```bash
 docker run -it -v ~/transip-ddns.pem:/home/certbot/cert.pem -v ~/.certbot_transip_helper.ini:/home/certbot/.certbot_transip_helper.ini -v $PWD/cert:/home/certbot/certs -e CERTBOT_ENV=liv -e EMAIL=user@example.com -e DOMAIN=example.com jvgemert/certbot_transip:0.1
 ```
