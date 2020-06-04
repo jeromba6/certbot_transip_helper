@@ -18,23 +18,23 @@ This helper can be used in combination with certbot in a way it is shown in `cal
    pip3 install transipApiV
    ```
 
-5. For testing purposes  `test.sh` can be used.  
+5. For testing purposes  `test.sh` can be used.
 
-   **Validation of the text record can take some time, depending of DNS record propagation.**  
+   **Validation of the text record can take some time, depending of DNS record propagation.**
 
-   **`test.sh` and certificate request cannot run at the same time, it uses the same TXT record!**  
+   **`test.sh` and certificate request cannot run at the same time, it uses the same TXT record!**
 
    **test.sh output:**
 
    ```bash
    0 entries found which have to be removed
-   Removing: 
+   Removing:
    Entry for _acme-challenge.blaataap.com created
    Waiting for getting succesfull DNS result: ..............................
    Entry resolved succesfully
    ```
 
-6. After adjusting `call_certbot.sh` or any other script of your choosing you can make use of it.  
+6. After adjusting `call_certbot.sh` or any other script of your choosing you can make use of it.
 
    **`call_certbot.sh` uses staging by default, change if necessary.**
 
