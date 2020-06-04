@@ -53,7 +53,7 @@ It works for wildcard certificates.
 
 ## TODO ##
 
-Update docker version
+Update docker documentation
 
 ```
 docker run -it -v ~/transip-ddns.pem:/home/certbot/cert.pem -v ~/.certbot_transip_helper.ini:/home/certbot/.certbot_transip_helper.ini -v $PWD/cert:/home/certbot/certs -e CERTBOT_ENV=liv -e EMAIL=user@example.com -e DOMAIN=example.com jvgemert/certbot_transip:0.1
