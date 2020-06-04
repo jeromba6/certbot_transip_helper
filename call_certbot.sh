@@ -4,6 +4,8 @@
 # EMAIL=user@example.com
 # DOMAIN=example.com
 
+mkdir -p ~/certs
+
 if [ -z "${EMAIL}"]
 then
    echo "Environment variable EMAIL is not set"

@@ -15,7 +15,7 @@ This helper can be used in combination with certbot in a way it is shown in `cal
 4. Make sure all the necessary Python packages are installed.
 
    ```bash
-   pip3 install transipApiV
+   pip3 install transipApiV dnspython
    ```
 
 5. For testing purposes  `test.sh` can be used.
@@ -34,10 +34,27 @@ This helper can be used in combination with certbot in a way it is shown in `cal
    Entry resolved succesfully
    ```
 
-6. After adjusting `call_certbot.sh` or any other script of your choosing you can make use of it.
+6. Set some environment variables
+   ```bash
+   export CERTBOT_ENV=live  # This is optional, when not set it will use the staging environment of letsencrypt
+   export EMAIL=user@example.com # Emailadress for revoking cert
+   export DOMAIN=example.com # Domain for which the wildcard certificate has to be generated
+   export FORCE_CERT_RENEW=True # This is optional, when set it will force new certificate generation
+   ```
+
+7. Now you can run `call_certbot.sh` or any other script of your choosing you can make use of it.
 
    **`call_certbot.sh` uses staging by default, change if necessary.**
 
 Certbot will call the script and create the requested TXT dns entry to validate. After validation the record will be removed again.
 
 It works for wildcard certificates.
+
+
+## TODO ##
+
+Update docker version
+
+```
+docker run -it -v ~/transip-ddns.pem:/home/certbot/cert.pem -v ~/.certbot_transip_helper.ini:/home/certbot/.certbot_transip_helper.ini -v $PWD/cert:/home/certbot/certs -e CERTBOT_ENV=liv -e EMAIL=user@example.com -e DOMAIN=example.com jvgemert/certbot_transip:0.1
+```
