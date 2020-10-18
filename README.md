@@ -63,5 +63,5 @@ docker run \
 -e CERTBOT_ENV=live \
 -e EMAIL=user@example.com \
 -e DOMAIN=example.com \
-jvgemert/certbot_transip:0.1
+docker.pkg.github.com/jeromba6/certbot_transip_helper/certbot_transip_helper:1.0
 ```
