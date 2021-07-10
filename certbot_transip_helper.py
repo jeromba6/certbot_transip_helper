@@ -8,12 +8,15 @@ import time
 import transipApiV6
 
 # Get environment variables that Certbot passes to us.
-certbot_domain = os.getenv('CERTBOT_DOMAIN')
-certbot_validation = os.getenv('CERTBOT_VALIDATION')
 certbot_auth_output = os.getenv('CERTBOT_AUTH_OUTPUT')
+certbot_domain = os.getenv('DOMAIN')
+certbot_sub_domain = os.getenv('SUB_DOMAIN')
+certbot_validation = os.getenv('CERTBOT_VALIDATION')
 
 # Entry that has to be in there for the validation
 acme_entry = '_acme-challenge'
+if certbot_sub_domain and certbot_sub_domain != '*':
+    acme_entry = acme_entry + '.' + certbot_sub_domain.replace('*.','')
 
 # Reading the ini file for configuation settings.
 config_file = os.path.expanduser('~') + '/.certbot_transip_helper.ini'
@@ -39,8 +42,15 @@ key_file = open(config['DEFAULT']['keyfile'], "r")
 key = key_file.read()
 key_file.close()
 
-# Get Header for authentication against transip api V6
-headers = transipApiV6.Generic(config['DEFAULT']['login'], key).get_headers()
+# Get Header for authentication against transip api V6 with retries
+for retries in range(5):
+  try:
+    headers = transipApiV6.Generic(config['DEFAULT']['login'], key).get_headers()
+    break
+  except:
+    print('Attempt {} failed to get a JWT.'.format(reties+1))
+    time.sleep(1)
+    continue
 
 # Request domains managed by this account
 domains=transipApiV6.Domains(headers)

@@ -15,7 +15,7 @@ This helper can be used in combination with certbot in a way it is shown in `cal
 4. Make sure all the necessary Python packages are installed.
 
    ```bash
-   pip3 install transipApiV6 dnspython
+   pip3 install transipApiV6 dnspython pyOpenSSLcat
    ```
 
 5. For testing purposes  `test.sh` can be used.
@@ -37,10 +37,11 @@ This helper can be used in combination with certbot in a way it is shown in `cal
 6. Set some environment variables
 
    ```bash
-   export CERTBOT_ENV=live  # This is optional, when not set it will use the staging environment of letsencrypt
+   export CERTBOT_ENV=live       # This is optional, when not set it will use the staging environment of letsencrypt
    export EMAIL=user@example.com # Emailadress for revoking cert
-   export DOMAIN=example.com # Domain for which the wildcard certificate has to be generated
-   export FORCE_CERT_RENEW=True # This is optional, when set it will force new certificate generation
+   export DOMAIN=example.com     # Domain for which the certificate has to be generated
+   export SUB_DOMAIN=www         # Entry for which the certificate has to be generated, '*' can be used for wildcard certificate
+   export FORCE_CERT_RENEW=True  # This is optional, when set it will force new certificate generation
    ```
 
 7. Now you can run `call_certbot.sh` or any other script of your choosing you can make use of it.
@@ -63,5 +64,6 @@ docker run \
 -e CERTBOT_ENV=live \
 -e EMAIL=user@example.com \
 -e DOMAIN=example.com \
-docker.pkg.github.com/jeromba6/certbot_transip_helper/certbot_transip_helper:1.0
+-e SUB_DOMAIN=www \
+docker.pkg.github.com/jeromba6/certbot_transip_helper/certbot_transip_helper:1.1
 ```

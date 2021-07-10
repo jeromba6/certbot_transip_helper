@@ -6,12 +6,12 @@
 
 mkdir -p ~/certs
 
-if [ -z "${EMAIL}"]
+if [ -z "${EMAIL}" ]
 then
    echo "Environment variable EMAIL is not set"
    exit 1
 fi
-if [ -z "${DOMAIN}"]
+if [ -z "${DOMAIN}" ]
 then
    echo "Environment variable DOMAIN is not set"
    exit 1
@@ -41,4 +41,4 @@ certbot -n --manual-public-ip-logging-ok \
         --config-dir ~/certs \
         --work-dir ~/certs \
         --logs-dir ~/certs \
-        -d "*.$DOMAIN" ${FORCE_RENEW}
+        -d "${SUB_DOMAIN}.${DOMAIN}" ${FORCE_RENEW}
