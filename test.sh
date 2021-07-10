@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOMAIN="example.com"
+DOMAIN="gemert.net"
 VALIDATION="Some random string to test"
 
 # Next should be in 1 line so the variables are passed to the command
