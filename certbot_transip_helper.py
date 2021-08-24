@@ -4,6 +4,7 @@ import configparser
 import dns.resolver  # pip3 install dnspython
 import json
 import os
+import sys
 import time
 import transipApiV6
 
@@ -48,7 +49,7 @@ for retries in range(5):
     headers = transipApiV6.Generic(config['DEFAULT']['login'], key).get_headers()
     break
   except:
-    print('Attempt {} failed to get a JWT.'.format(reties+1))
+    print('Attempt {} failed to get a JWT.'.format(retries+1))
     time.sleep(1)
     continue
 
@@ -90,18 +91,27 @@ if certbot_auth_output is None:
   sleep_interval = 10
   max_tries = 100
   failed = True
-  print('Waiting for getting succesfull DNS result: ',end='')
+  # print('Waiting for getting succesfull DNS result: ',end='')
+  my_resolver = dns.resolver.Resolver()
+  host = acme_entry + '.' + certbot_domain
+  print('Host: {}'.format(host))
   for x in range (max_tries):
+      print('.',end='')
+      sys.stdout.flush()
       try:
-          print('.',end='')
-          time.sleep(sleep_interval)
-          res = str(dns.resolver.query(acme_entry + '.' + certbot_domain, "TXT").response.answer[0][-1]).replace('"','')
-          if certbot_validation == res:
-              failed = False
-              print()
-              break
+          res = my_resolver.resolve(host, "TXT")
+          if len(res) == 1:
+            res = str(res[0])
+            if '"' + certbot_validation + '"' == res:
+                failed = False
+                print()
+                break
+      except KeyboardInterrupt:
+        print('CTRL + C pressed')
+        exit(1)
       except:
-          pass
+        time.sleep(sleep_interval)
+  pass
 
   # End of the retries so check or it has succeded.
   if failed:
