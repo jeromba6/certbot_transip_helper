@@ -65,5 +65,5 @@ docker run \
 -e EMAIL=user@example.com \
 -e DOMAIN=example.com \
 -e SUB_DOMAIN=www \
-docker.pkg.github.com/jeromba6/certbot_transip_helper/certbot_transip_helper:1.2.1
+docker.pkg.github.com/jeromba6/certbot_transip_helper/certbot_transip_helper:1.2.2
 ```
