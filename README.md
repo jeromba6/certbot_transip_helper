@@ -15,7 +15,7 @@ This helper can be used in combination with certbot in a way it is shown in `cal
 4. Make sure all the necessary Python packages are installed.
 
    ```bash
-   pip3 install transipApiV6 dnspython pyOpenSSLcat
+   pip3 install transipApiV6 dnspython pyOpenSSL
    ```
 
 5. For testing purposes  `test.sh` can be used.
