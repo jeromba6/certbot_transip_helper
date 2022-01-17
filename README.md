@@ -15,7 +15,7 @@ This helper can be used in combination with certbot in a way it is shown in `cal
 4. Make sure all the necessary Python packages are installed.
 
    ```bash
-   pip3 install transipApiV6 dnspython pyOpenSSL
+   pip3 install -r requirements.txt
    ```
 
 5. For testing purposes  `test.sh` can be used.
@@ -65,5 +65,5 @@ docker run \
 -e EMAIL=user@example.com \
 -e DOMAIN=example.com \
 -e SUB_DOMAIN=www \
-docker.pkg.github.com/jeromba6/certbot_transip_helper/certbot_transip_helper:1.2.2
+ghcr.io/jeromba6/certbot_transip_helper/certbot_transip_helper:1.2.3
 ```
