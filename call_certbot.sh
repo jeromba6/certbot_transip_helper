@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # The variables EMAIL and DOMAIN should be set in the environment
 # EMAIL=user@example.com
