@@ -52,18 +52,30 @@ Certbot will call the script and create the requested TXT dns entry to validate.
 
 It works for wildcard certificates.
 
-## TODO
+## When making use of the docker image this should be done with some adaptations
 
-Update docker documentation
+Create a transip.pem file which should be used to login to the API of transip
+
+Make use of the following ini file and only change the login. The keep the setting of the keyfile
+
+   ```text
+   [DEFAULT]
+   login = transip_username
+   keyfile = /home/certbot/transip.pem
+   ```
+
+Create a directory where the certs can be created this should be writable for user with ID 1000
+
+Docker run with the next command
 
 ```bash
 docker run \
--v ~/transip-ddns.pem:/home/certbot/cert.pem \
+-v ~/transip.pem:/home/certbot/transip.pem \
 -v ~/.certbot_transip_helper.ini:/home/certbot/.certbot_transip_helper.ini \
--v $PWD/cert:/home/certbot/certs \
+-v $PWD/certs:/home/certbot/certs \
 -e CERTBOT_ENV=live \
--e EMAIL=user@example.com \
+-e EMAIL=domain@exmaple.com \
 -e DOMAIN=example.com \
--e SUB_DOMAIN=www \
-ghcr.io/jeromba6/certbot_transip_helper/certbot_transip_helper:1.2.3
+-e SUB_DOMAIN=* \
+ghcr.io/jeromba6/certbot_transip_helper/certbot_transip_helper:1.2.4
 ```
