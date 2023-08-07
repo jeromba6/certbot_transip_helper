@@ -34,7 +34,7 @@ This helper can be used in combination with certbot in a way it is shown in `cal
    ```bash
    0 entries found which have to be removed
    Removing:
-   Entry for _acme-challenge.blaataap.com created
+   Entry for _acme-challenge.example.com created
    Waiting for getting succesfull DNS result: ..............................
    Entry resolved succesfully
    ```
