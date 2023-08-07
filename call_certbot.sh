@@ -36,8 +36,8 @@ certbot -n --manual-public-ip-logging-ok \
         --agree-tos \
         --email $EMAIL \
         --manual --preferred-challenges=dns \
-        --manual-auth-hook /opt/certbot/certbot_transip_helper.py \
-        --manual-cleanup-hook /opt/certbot/certbot_transip_helper.py \
+        --manual-auth-hook /opt/certbot_transip_helper/certbot_transip_helper.py \
+        --manual-cleanup-hook /opt/certbot_transip_helper/certbot_transip_helper.py \
         --config-dir ~/certs \
         --work-dir ~/certs \
         --logs-dir ~/certs \
