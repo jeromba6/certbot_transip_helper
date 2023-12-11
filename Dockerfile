@@ -1,4 +1,4 @@
-FROM certbot/certbot:v1.18.0
+FROM certbot/certbot:v2.8.0
 COPY call_certbot.sh certbot_transip_helper.py requirements.txt /opt/certbot/
 
 RUN adduser -D certbot ; \

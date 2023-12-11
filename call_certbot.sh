@@ -33,6 +33,7 @@ then
 fi
 certbot -n --manual-public-ip-logging-ok \
         --server $SERVER certonly \
+        --preferred-chain "ISRG Root X1" \
         --agree-tos \
         --email $EMAIL \
         --manual --preferred-challenges=dns \
