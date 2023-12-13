@@ -120,3 +120,5 @@ if certbot_auth_output is None:
         print('Checking for DNS change succesfull failed.')
         exit(1)
     print('Entry resolved succesfully')
+    print('Sleep for 30 seconds to make sure the DNS entry is propagated')
+    time.sleep(30)

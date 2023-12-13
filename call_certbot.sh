@@ -36,9 +36,10 @@ certbot -n --manual-public-ip-logging-ok \
         --preferred-chain "ISRG Root X1" \
         --agree-tos \
         --email $EMAIL \
-        --manual --preferred-challenges=dns \
+        --manual \
+        --preferred-challenges=dns \
         --manual-auth-hook /opt/certbot_transip_helper/certbot_transip_helper.py \
-        --manual-cleanup-hook /opt/certbot_transip_helper/certbot_transip_helper.py \
+        --post-hook /opt/certbot_transip_helper/certbot_transip_helper.py \
         --config-dir ~/certs \
         --work-dir ~/certs \
         --logs-dir ~/certs \
