@@ -1,13 +1,2 @@
-# certifi==2021.5.30
-# charset-normalizer==2.0.4
-# cryptography==3.4.8 # Docker build breaks when this is included
 dnspython
-# idna==3.2
-# pycparser==2.20
-# pyOpenSSL==20.0.1
-# requests==2.26.0
-# six==1.16.0
 transipApiV6
-# urllib3==1.26.6
-# requests-toolbelt==0.9.1
-# testresources==2.0.1

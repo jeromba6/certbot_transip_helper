@@ -82,5 +82,5 @@ docker run \
 -e EMAIL=domain@exmaple.com \
 -e DOMAIN=example.com \
 -e SUB_DOMAIN=* \
-ghcr.io/jeromba6/certbot_transip_helper/certbot_transip_helper:1.2.4
+ghcr.io/jeromba6/certbot_transip_helper/certbot_transip_helper:1.2.6
 ```
